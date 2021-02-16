@@ -37,7 +37,7 @@ $ make
 $ cd kael_ds
 $ cd test
 $ make test_dynamic_array
-$ ./a.out
+$ ./test_dynamic_array
 当前的容量为: 5
 当前的容量为: 5
 当前的容量为: 5
