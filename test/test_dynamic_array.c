@@ -15,7 +15,7 @@ void callback(void *data)
     printf("姓名: %s, 年龄：%d\n", p -> name, p -> age);
 }
 
-void test01()
+void test_init_insert_print()
 {
     // 创建动态数组
     struct DynamicArray *dynamic_array =
@@ -56,6 +56,6 @@ void test01()
 
 int main()
 {
-    test01();
+    test_init_insert_print();
     return 0;
 }
