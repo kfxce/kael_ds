@@ -14,6 +14,7 @@
 
 项目文件结构：
 
+```
 kael_ds/
 ├── kael_ds-src
 │   ├── dynamic_array.c
@@ -21,4 +22,5 @@ kael_ds/
 ├── Makefile
 ├── README.md
 └── test
+```
 我特地去看了下skynet项目头文件是放在了skyent-src目录下，和.c源码是放一起的，那么我也准备这样做。
