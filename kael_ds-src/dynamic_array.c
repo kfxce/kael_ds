@@ -150,7 +150,7 @@ BOOL remove_by_pos_dynamic_array(struct DynamicArray *dynamic_array, int pos)
  * return：True：成功，False:失败
  */
 BOOL remove_by_value_dynamic_array(struct DynamicArray *dynamic_array, void *data, 
-        int(*compare_callback)(void *, void*))
+        BOOL(*compare_callback)(void *, void*))
 {
     if (!dynamic_array || !data)
         return False;

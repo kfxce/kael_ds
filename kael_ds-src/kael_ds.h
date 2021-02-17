@@ -3,6 +3,7 @@ typedef int BOOL;
 extern const BOOL True; // 真
 extern const BOOL False; // 假
 
+//==============================线性表===================================
 
 /*
  * =============================
@@ -70,3 +71,60 @@ BOOL remove_by_value_dynamic_array(struct DynamicArray *dynamic_array, void *dat
  * return BOOL: True：成功，False: 失败
  */
 BOOL destroy_dynamic_array(struct DynamicArray *dynamic_array);
+
+
+/*
+ *
+ * ===========================
+ *          单向链表         =
+ * ===========================
+ *
+ */
+
+// 链表节点
+struct LinkNode
+{
+    void *data; // 数据域
+    struct LinkNode *next; // 指针域
+};
+
+
+// 链表结构体
+struct LinkList
+{
+    struct LinkNode header; // 头节点
+    int m_size; // 链表长度
+};
+
+/* 初始化链表
+ *
+ * return struct LinkList *: 返回结构体链表指针, 返回NULL则为失败
+ */
+
+struct LinkList *init_link_list();
+
+
+/* 向链表插入节点
+ *
+ * param struct LinkList *link_list: 链表结构体指针
+ * param int pos: 要插入的位置
+ * param void *data: 要插入的数据
+ *
+ * return BOOL；True成功，False失败
+ */
+BOOL insert_link_list(struct LinkList *link_list, int pos, void *data);
+
+/* 遍历链表
+ * 
+ * param struct LinkList *link_list: 链表结构体指针
+ * param callbck: 回调函数
+ */
+void print_link_list(struct LinkList *link_list, void(*callbaack)(void *));
+
+/* 删除节点
+ * param struct LinkList *link_list: 链表结构体指针
+ * param int pos: 删除的位置
+ *
+ * return BOOL: 成功返回True, 失败返回False
+ */
+BOOL remove_by_pos_link_list(struct LinkList *link_list, int pos);
