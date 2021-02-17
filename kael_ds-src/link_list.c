@@ -103,10 +103,13 @@ BOOL remove_by_pos_link_list(struct LinkList *link_list, int pos)
 
     struct LinkNode *current_link_node = &link_list -> header;
     int i;
-    for (i = 0; i < pos; i++)
+    for (i = 0; i < pos - 1; i++)
         current_link_node = current_link_node -> next;
 
-    current_link_node -> next = current_link_node -> next -> next;
+    // 要删除的节点
+    struct LinkNode *del_link_node = current_link_node -> next;
+    
+    current_link_node -> next = del_link_node -> next;
 
     // 释放删除掉的节点
     free(del_link_node);
