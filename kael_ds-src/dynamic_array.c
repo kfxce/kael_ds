@@ -20,7 +20,7 @@ struct DynamicArray * init_dynamic_array(int capacity)
         }
         struct DynamicArray *dynamic_array = malloc(sizeof(struct DynamicArray));
         // 判断内存是否申请成功
-        if (dynamic_array == NULL)
+        if (!dynamic_array)
         {
                 return NULL;
         }
@@ -34,7 +34,7 @@ struct DynamicArray * init_dynamic_array(int capacity)
         dynamic_array -> paddr = malloc(sizeof(void *) * dynamic_array -> m_capacity);
 
         // 判断内存是否申请成功
-        if (dynamic_array -> paddr == NULL)
+        if (!dynamic_array -> paddr)
         {
                 free(dynamic_array);
                 return NULL;
@@ -50,19 +50,15 @@ struct DynamicArray * init_dynamic_array(int capacity)
  * param int pos: 被插入动态数组的位置
  * param void *data: 被插入动态数组的新元素
  *
- * return int: True：成功，False：失败
+ * return BOOL: True：成功，False：失败
  */
-int insert_dynamic_array(struct DynamicArray *dynamic_array, int pos, void *data)
+BOOL insert_dynamic_array(struct DynamicArray *dynamic_array, int pos, void *data)
 {
-        if (dynamic_array == NULL)
+        if (!dynamic_array || !data)
         {
                 return False; 
         }
 
-        if (data == NULL)
-        {
-                return False;
-        }
 
         // 无效的位置
         if (pos < 0 || pos > dynamic_array -> m_size)
@@ -77,7 +73,7 @@ int insert_dynamic_array(struct DynamicArray *dynamic_array, int pos, void *data
                 int new_capacity = dynamic_array -> m_capacity * 2;
                 // 创建新空间
                 void ** new_space = malloc(sizeof(void *) * new_capacity);
-                if (new_space == NULL)
+                if (!new_space)
                 {
                         return False;
                 }
@@ -112,13 +108,84 @@ int insert_dynamic_array(struct DynamicArray *dynamic_array, int pos, void *data
  */
 void print_dynamic_array(struct DynamicArray *dynamic_array, void(*callback)(void *))
 {
-    if (dynamic_array == NULL)
-    {
+    if (!dynamic_array)
         return;
-    }
+    int i;
+    for (i = 0; i < dynamic_array -> m_size; i++)
+        callback(dynamic_array -> paddr[i]);
+}
+
+/* 根据元素在数组中的位置删除数组中的元素
+ *
+ * param struct DynamicArray dynamic_array*: 动态数组指针
+ * param int pos: 删除的位置
+ * return: True: 成功，False：失败
+ */
+BOOL remove_by_pos_dynamic_array(struct DynamicArray *dynamic_array, int pos)
+{
+    // 如果数组指针为NULL
+    if (!dynamic_array)
+        return False;
+
+    // 无效的位置
+    if (pos < 0 || pos > dynamic_array -> m_size -1)
+        return False;
+
+    int i;
+    // 从pos开始到数组的结尾的数据进行前移
+    for (i = pos; i < dynamic_array -> m_size - 1; i++)
+        dynamic_array -> paddr[i] = dynamic_array -> paddr[i + 1];
+
+    
+    // 数组大小减一
+    dynamic_array -> m_size --;
+    return True;
+}
+
+
+/*根据元素的值删除数组中的元素
+ * 
+ * param struct DynamicArray dynamic_array*; 动态数组指针
+ * param void *data: 值
+ * return：True：成功，False:失败
+ */
+BOOL remove_by_value_dynamic_array(struct DynamicArray *dynamic_array, void *data, 
+        int(*compare_callback)(void *, void*))
+{
+    if (!dynamic_array || !data)
+        return False;
+
     int i;
     for (i = 0; i < dynamic_array -> m_size; i++)
     {
-        callback(dynamic_array -> paddr[i]);
+        if(True == compare_callback(dynamic_array -> paddr[i], data))
+        {
+            if(True == remove_by_pos_dynamic_array(dynamic_array, i))
+                return True;
+            else
+                return False;
+        }
     }
+    return False;
+}
+
+/*销毁数组
+ *
+ * param struct DynamicArray dynamic_array*: 动态数组指针
+ *
+ * return BOOL: True：成功，False: 失败
+ */
+BOOL destroy_dynamic_array(struct DynamicArray *dynamic_array)
+{
+    if (!dynamic_array)
+        return False;
+    if (dynamic_array -> paddr)
+    {
+        free(dynamic_array -> paddr);
+        dynamic_array -> paddr = NULL;
+    }
+
+    free(dynamic_array);
+    dynamic_array = NULL;
+    return True;
 }
