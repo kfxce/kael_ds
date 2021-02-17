@@ -1,4 +1,5 @@
 #include "kael_ds.h"
 
-const BOOL True = 1;
-const BOOL False = 0;
+const int False = 0;
+const int True = 1;
+const int ERR = -1;

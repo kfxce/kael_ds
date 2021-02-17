@@ -9,7 +9,7 @@ struct Person
     int age;
 };
 
-BOOL compare_callback(void *data1, void *data2)
+int compare_callback(void *data1, void *data2)
 {
     struct Person *p1 = data1;
     struct Person *p2 = data2;
@@ -80,9 +80,7 @@ void test_init_insert_print_delete()
 
     printf("销毁数组\n");
     destroy_dynamic_array(dynamic_array);
-
-    ////访问一个被NULL的指针为导致段错误
-    print_dynamic_array(dynamic_array, callback); 
+    print_dynamic_array(dynamic_array, callback);
 }
 
 int main()

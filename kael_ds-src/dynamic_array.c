@@ -50,20 +50,20 @@ struct DynamicArray * init_dynamic_array(int capacity)
  * param int pos: 被插入动态数组的位置
  * param void *data: 被插入动态数组的新元素
  *
- * return BOOL: True：成功，False：失败
+ * return int: True：成功，False：失败
  */
-BOOL insert_dynamic_array(struct DynamicArray *dynamic_array, int pos, void *data)
+int insert_dynamic_array(struct DynamicArray *dynamic_array, int pos, void *data)
 {
         if (!dynamic_array || !data)
         {
-                return False; 
+                return ERR; 
         }
 
 
         // 无效的位置
         if (pos < 0 || pos > dynamic_array -> m_size)
         {
-                return False;
+                return ERR;
         }
 
         // 先判断是否已经满了，如果满则开辟
@@ -75,7 +75,7 @@ BOOL insert_dynamic_array(struct DynamicArray *dynamic_array, int pos, void *dat
                 void ** new_space = malloc(sizeof(void *) * new_capacity);
                 if (!new_space)
                 {
-                        return False;
+                        return ERR;
                 }
                 // 将原有数据拷贝到新空间下
                 memcpy(new_space, dynamic_array -> paddr, sizeof(void *) * dynamic_array -> m_capacity);
@@ -110,6 +110,8 @@ void print_dynamic_array(struct DynamicArray *dynamic_array, void(*callback)(voi
 {
     if (!dynamic_array)
         return;
+    if (dynamic_array -> m_size == 0)
+        return;
     int i;
     for (i = 0; i < dynamic_array -> m_size; i++)
         callback(dynamic_array -> paddr[i]);
@@ -121,15 +123,15 @@ void print_dynamic_array(struct DynamicArray *dynamic_array, void(*callback)(voi
  * param int pos: 删除的位置
  * return: True: 成功，False：失败
  */
-BOOL remove_by_pos_dynamic_array(struct DynamicArray *dynamic_array, int pos)
+int remove_by_pos_dynamic_array(struct DynamicArray *dynamic_array, int pos)
 {
     // 如果数组指针为NULL
     if (!dynamic_array)
-        return False;
+        return ERR;
 
     // 无效的位置
     if (pos < 0 || pos > dynamic_array -> m_size -1)
-        return False;
+        return ERR;
 
     int i;
     // 从pos开始到数组的结尾的数据进行前移
@@ -149,11 +151,11 @@ BOOL remove_by_pos_dynamic_array(struct DynamicArray *dynamic_array, int pos)
  * param void *data: 值
  * return：True：成功，False:失败
  */
-BOOL remove_by_value_dynamic_array(struct DynamicArray *dynamic_array, void *data, 
-        BOOL(*compare_callback)(void *, void*))
+int remove_by_value_dynamic_array(struct DynamicArray *dynamic_array, void *data, 
+        int(*compare_callback)(void *, void*))
 {
     if (!dynamic_array || !data)
-        return False;
+        return ERR;
 
     int i;
     for (i = 0; i < dynamic_array -> m_size; i++)
@@ -173,9 +175,11 @@ BOOL remove_by_value_dynamic_array(struct DynamicArray *dynamic_array, void *dat
  *
  * param struct DynamicArray dynamic_array*: 动态数组指针
  *
- * return BOOL: True：成功，False: 失败
+ * return int: True：成功，False: 失败
+ * 
+ * 注意：销毁之后，如果再访问这个指针，就会出现段错误
  */
-BOOL destroy_dynamic_array(struct DynamicArray *dynamic_array)
+int destroy_dynamic_array(struct DynamicArray *dynamic_array)
 {
     if (!dynamic_array)
         return False;

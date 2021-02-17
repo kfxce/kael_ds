@@ -1,7 +1,6 @@
-typedef int BOOL;
-
-extern const BOOL True; // 真
-extern const BOOL False; // 假
+extern const int True; // 真
+extern const int False; // 假
+extern const int ERR; // 空指针
 
 //==============================线性表===================================
 
@@ -36,9 +35,9 @@ struct DynamicArray * init_dynamic_array(int capacity);
  * param int pos: 被插入动态数组的位置
  * param void *data: 被插入动态数组的新元素
  *
- * return BOOL: True：成功，False：失败
+ * return int: True：成功，False：失败
  */
-BOOL insert_dynamic_array(struct DynamicArray *dynamic_array, int pos, void *data);
+int insert_dynamic_array(struct DynamicArray *dynamic_array, int pos, void *data);
 
 /* 遍历动态数组
  */
@@ -49,18 +48,18 @@ void print_dynamic_array(struct DynamicArray *dynamic_array, void(*callback)(voi
  *
  * param struct DynamicArray dynamic_array*: 动态数组指针
  * param int pos: 删除的位置
- * return BOOL: True: 成功，False：失败
+ * return int: True: 成功，False：失败
  */
-BOOL remove_by_pos_dynamic_array(struct DynamicArray *dynamic_array, int pos);
+int remove_by_pos_dynamic_array(struct DynamicArray *dynamic_array, int pos);
 
 
 /*根据元素的值删除数组中的元素
  * 
  * param struct DynamicArray dynamic_array*; 动态数组指针
  * param void *data: 值
- * return BOOL：True：成功，False:失败
+ * return int：True：成功，False:失败
  */
-BOOL remove_by_value_dynamic_array(struct DynamicArray *dynamic_array, void *data,
+int remove_by_value_dynamic_array(struct DynamicArray *dynamic_array, void *data,
         int(*compare_callback)(void *, void*));
 
 
@@ -68,9 +67,9 @@ BOOL remove_by_value_dynamic_array(struct DynamicArray *dynamic_array, void *dat
  *
  * param struct DynamicArray dynamic_array*: 动态数组指针
  *
- * return BOOL: True：成功，False: 失败
+ * return int: True：成功，False: 失败
  */
-BOOL destroy_dynamic_array(struct DynamicArray *dynamic_array);
+int destroy_dynamic_array(struct DynamicArray *dynamic_array);
 
 
 /*
@@ -110,9 +109,9 @@ struct LinkList *init_link_list();
  * param int pos: 要插入的位置
  * param void *data: 要插入的数据
  *
- * return BOOL；True成功，False失败
+ * return int；True成功，False失败
  */
-BOOL insert_link_list(struct LinkList *link_list, int pos, void *data);
+int insert_link_list(struct LinkList *link_list, int pos, void *data);
 
 /* 遍历链表
  * 
@@ -121,10 +120,43 @@ BOOL insert_link_list(struct LinkList *link_list, int pos, void *data);
  */
 void print_link_list(struct LinkList *link_list, void(*callbaack)(void *));
 
-/* 删除节点
+/* 删除节点-根据位置
  * param struct LinkList *link_list: 链表结构体指针
  * param int pos: 删除的位置
  *
- * return BOOL: 成功返回True, 失败返回False
+ * return int: 成功返回True, 失败返回False
  */
-BOOL remove_by_pos_link_list(struct LinkList *link_list, int pos);
+int remove_by_pos_link_list(struct LinkList *link_list, int pos);
+
+/* 删除节点-根据值
+ *
+ * param struct LinkList *link_list: 链表结构体指针
+ * param void *data: 数据
+ * param int(*compare_callback)(void *, void*): 比较值是否相等的回调函数
+ *
+ * return int: 成功返回True, 失败返回False
+ */
+int remove_by_value_link_list(struct LinkList *link_list, void *data, int(*compare_callback)(void *, void *));
+
+/* 清空链表
+ * param struct LinkList *link_list: 链表指针
+ *
+ * return int: True 成功，False 失败
+ */
+int clear_link_list(struct LinkList *link_list);
+
+/* 返回链表长度
+ *
+ * param struct LinkList *link_list: 链表指针
+ *
+ * return int: 链表长度
+ */
+int len_link_list(struct LinkList *link_list);
+
+/* 销毁链表
+ *
+ * param struct LinkList *link_list: 链表指针
+ *
+ * return int: True成功，False失败，ERR错误
+ */
+int destroy_link_list(struct LinkList *link_list);

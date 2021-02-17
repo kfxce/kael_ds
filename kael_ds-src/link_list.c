@@ -27,9 +27,9 @@ struct LinkList * init_link_list()
  * param int pos: 要插入的位置
  * param void *data: 要插入的数据
  *
- * return BOOL；True成功，False失败
+ * return int；True成功，False失败
  */
-BOOL insert_link_list(struct LinkList *link_list, int pos, void *data)
+int insert_link_list(struct LinkList *link_list, int pos, void *data)
 {
     if(!link_list || !data)
         return False;
@@ -77,6 +77,9 @@ void print_link_list(struct LinkList *link_list, void(*callback)(void *))
     if (!link_list)
         return;
 
+    if (link_list -> m_size == 0)
+        return;
+
     struct LinkNode *current_link_node = link_list -> header.next;
     int i;
     for (i = 0; i < link_list -> m_size; i++)
@@ -87,13 +90,13 @@ void print_link_list(struct LinkList *link_list, void(*callback)(void *))
 }
 
 
-/* 删除节点
+/* 删除节点-根据位置
  * param struct LinkList *link_list: 链表结构体指针
  * param int pos: 删除的位置
  *
- * return BOOL: 成功返回True, 失败返回False
+ * return int: 成功返回True, 失败返回False
  */
-BOOL remove_by_pos_link_list(struct LinkList *link_list, int pos)
+int remove_by_pos_link_list(struct LinkList *link_list, int pos)
 {
     if (!link_list) 
         return False;
@@ -103,7 +106,7 @@ BOOL remove_by_pos_link_list(struct LinkList *link_list, int pos)
 
     struct LinkNode *current_link_node = &link_list -> header;
     int i;
-    for (i = 0; i < pos - 1; i++)
+    for (i = 0; i < pos; i++)
         current_link_node = current_link_node -> next;
 
     // 要删除的节点
@@ -119,4 +122,103 @@ BOOL remove_by_pos_link_list(struct LinkList *link_list, int pos)
     link_list -> m_size --;
 
     return True; 
+}
+
+
+/* 删除节点-根据值
+ *
+ * param struct LinkList *link_list: 链表结构体指针
+ * param void *data: 数据
+ * param int(*compare_callback)(void *, void*): 比较值是否相等的回调函数
+ *
+ * return int: 成功返回True, 失败返回False
+ */
+int remove_by_value_link_list(struct LinkList *link_list, void *data, int(*compare_callback)(void *, void *))
+{
+    if (!link_list || !data)
+        return False;
+
+    struct LinkNode *prev_link_node = &link_list -> header;
+    struct LinkNode *current_link_node = prev_link_node -> next;
+
+    for (int i = 0; i < link_list -> m_size; i++)
+    {
+        if (True == compare_callback(current_link_node -> data, data))
+        {
+            prev_link_node -> next = current_link_node -> next;
+            free(current_link_node);
+            current_link_node = NULL;
+            
+            link_list -> m_size --;
+            return True;
+        }
+
+        prev_link_node = current_link_node;
+        current_link_node = current_link_node -> next;
+    }
+
+    return False;
+}
+
+
+/* 清空链表
+ * param struct LinkList *link_list: 链表指针
+ *
+ * return int: True 成功，False 失败
+ */
+int clear_link_list(struct LinkList *link_list)
+{
+    if (!link_list)
+        return False;
+
+    struct LinkNode *current_link_node = link_list -> header.next;
+    
+    for(int i = 0; i < link_list -> m_size; i++)
+    {
+        struct LinkNode *next_link_node = current_link_node -> next;
+        free(current_link_node);
+        current_link_node = next_link_node;
+    }
+
+    link_list -> header.next = NULL;
+    link_list -> m_size = 0;
+
+    return True;
+}
+
+/* 返回链表长度
+ *
+ * param struct LinkList *link_list: 链表指针
+ *
+ * return int: 链表长度， -1为错误
+ */
+int len_link_list(struct LinkList *link_list)
+{
+    if (!link_list)
+        return ERR;
+    return link_list -> m_size;
+}
+
+/* 销毁链表
+ *
+ * param struct LinkList *link_list: 链表指针
+ *
+ * return int: True成功，False失败，ERR错误
+ */
+int destroy_link_list(struct LinkList *link_list)
+{
+    if (!link_list)
+        return ERR;
+
+    int success = clear_link_list(link_list);
+    if (success == True)
+    {
+        free(link_list);
+        link_list = NULL;
+        return True;
+    }
+    else
+    {
+        return success;
+    }
 }

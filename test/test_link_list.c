@@ -9,7 +9,7 @@ struct Person1
     int age;
 };
 
-BOOL compare_callback11(void *data1, void *data2)
+int compare_callback11(void *data1, void *data2)
 {
     struct Person1 *p1 = data1;
     struct Person1 *p2 = data2;
@@ -72,18 +72,21 @@ void test_init_insert_print_delete()
     print_link_list(link_list, callback1);
 
 
-    /*
     // 根据元素值删除元素
-    printf("删除元素p1\n");
+    printf("删除元素p1, p2\n");
     remove_by_value_link_list(link_list, &p1, compare_callback11);
+    remove_by_value_link_list(link_list, &p2, compare_callback11);
     print_link_list(link_list, callback1);
 
-    printf("销毁数组\n");
-    destroy_link_list(link_list);
-
-    ////访问一个被NULL的指针为导致段错误
+    printf("清空链表\n");
+    clear_link_list(link_list);
     print_link_list(link_list, callback1); 
-    */
+
+    printf("链表长度: %d\n", link_list -> m_size);
+
+    printf("销毁链表\n");
+    destroy_link_list(link_list);
+    print_link_list(link_list, callback1); 
 }
 
 int main()
