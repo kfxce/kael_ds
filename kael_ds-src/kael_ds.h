@@ -185,7 +185,7 @@ struct SeqStack
 
 /* 初始化栈
  */
-struct SeqStack *init_stack();
+struct SeqStack *init_seq_stack();
 
 /* 入栈
  *
@@ -194,7 +194,7 @@ struct SeqStack *init_stack();
  *
  * return int: True成功，False，失败, ERR错误
  */
-int push_stack(struct SeqStack *stack, void *data);
+int push_seq_stack(struct SeqStack *stack, void *data);
 
 /* 出栈
  *
@@ -203,7 +203,7 @@ int push_stack(struct SeqStack *stack, void *data);
  * return void *data: 数据，NULL获取失败
  */
 
-void *pop_stack(struct SeqStack *stack);
+void *pop_seq_stack(struct SeqStack *stack);
 
 /* 返回栈的顶端元素
  *
@@ -222,7 +222,7 @@ void *top_seq_stack(struct SeqStack *stack);
  *
  * return int: 栈大小, ERR错误
  */
-int size_stack(struct SeqStack *stack);
+int size_seq_stack(struct SeqStack *stack);
 
 /* 返回栈是否为空
  *
@@ -230,7 +230,7 @@ int size_stack(struct SeqStack *stack);
  *
  * return int: True为空，False不为空， ERR错误
  */
-int is_empty_stack(struct SeqStack *stack);
+int is_empty_seq_stack(struct SeqStack *stack);
 
 /* 销毁栈
  *
@@ -238,4 +238,4 @@ int is_empty_stack(struct SeqStack *stack);
  *
  * return int: True成功，False，失败, ERR错误
  */
-int destroy_stack(struct SeqStack *stack);
+int destroy_seq_stack(struct SeqStack *stack);

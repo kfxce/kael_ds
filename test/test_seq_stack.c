@@ -12,7 +12,7 @@ struct Person2
 
 void test_stack_op()
 {
-    struct SeqStack *stack = init_stack();
+    struct SeqStack *stack = init_seq_stack();
 
     printf("当前的大小为: %d\n", stack -> m_size);
 
@@ -24,33 +24,33 @@ void test_stack_op()
     struct Person2 p5 = {"亚索5", 18};
     struct Person2 p6 = {"亚索6", 18};
 
-    push_stack(stack, &p1);
+    push_seq_stack(stack, &p1);
     printf("当前的大小为: %d\n", stack -> m_size);
 
-    push_stack(stack, &p2);
+    push_seq_stack(stack, &p2);
     printf("当前的大小为: %d\n", stack -> m_size);
 
-    push_stack(stack, &p3);
+    push_seq_stack(stack, &p3);
     printf("当前的大小为: %d\n", stack -> m_size);
 
-    push_stack(stack, &p4);
+    push_seq_stack(stack, &p4);
     printf("当前的大小为: %d\n", stack -> m_size);
 
-    push_stack(stack, &p5);
+    push_seq_stack(stack, &p5);
     printf("当前的大小为: %d\n", stack -> m_size);
 
-    push_stack(stack, &p6);
+    push_seq_stack(stack, &p6);
     printf("当前的大小为: %d\n", stack -> m_size);
 
     printf("pop\n");
-    struct Person2 *data = (struct Person2*)pop_stack(stack);
+    struct Person2 *data = (struct Person2*)pop_seq_stack(stack);
     printf("pop = %s, %d\n", data -> name, data -> age);
 
-    int ok =is_empty_stack(stack);
+    int ok =is_empty_seq_stack(stack);
     printf("is empty = %d\n", ok);
 
     printf("destroy\n");
-    destroy_stack(stack);
+    destroy_seq_stack(stack);
 }
 
 int main()

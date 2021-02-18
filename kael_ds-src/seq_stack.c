@@ -2,84 +2,84 @@
 #include "kael_ds.h"
 #include <string.h>
 
-struct SeqStack *init_stack()
+struct SeqStack *init_seq_stack()
 {
-    struct SeqStack *stack = malloc(sizeof(struct SeqStack));
-    if (!stack)
+    struct SeqStack *seq_stack = malloc(sizeof(struct SeqStack));
+    if (!seq_stack)
         return NULL;
 
     // 清空数组中的每个元素
-    memset(stack -> data, 0, sizeof(void *) * STACK_MAX);
-    stack -> m_size = 0;
+    memset(seq_stack -> data, 0, sizeof(void *) * STACK_MAX);
+    seq_stack -> m_size = 0;
 
-    return stack;
+    return seq_stack;
 }
 
-int push_stack(struct SeqStack *stack, void *data)
+int push_seq_stack(struct SeqStack *seq_stack, void *data)
 {
-    if (!stack || !data)
+    if (!seq_stack || !data)
         return ERR;
     
     // 判断栈是否满
-    if (stack -> m_size == STACK_MAX)
+    if (seq_stack -> m_size == STACK_MAX)
         return ERR;
-    stack -> data[stack -> m_size] = data;
+    seq_stack -> data[seq_stack -> m_size] = data;
     // 更新栈大小
-    stack -> m_size ++;
+    seq_stack -> m_size ++;
 
     return True;
 }
 
-void *pop_stack(struct SeqStack *stack)
+void *pop_seq_stack(struct SeqStack *seq_stack)
 {
-    if (!stack)
+    if (!seq_stack)
         return NULL;
 
-    if (stack -> m_size == 0)
+    if (seq_stack -> m_size == 0)
         return NULL;
 
-    void *data = stack -> data[stack -> m_size - 1];
-    stack -> data[stack -> m_size -1] = NULL;
-    stack -> m_size --;
+    void *data = seq_stack -> data[seq_stack -> m_size - 1];
+    seq_stack -> data[seq_stack -> m_size -1] = NULL;
+    seq_stack -> m_size --;
     return data;
 }
 
-void *top_seq_stack(struct SeqStack *stack)
+void *top_seq_seq_stack(struct SeqStack *seq_stack)
 {
-    if (!stack)
+    if (!seq_stack)
         return NULL;
 
-    if (stack -> m_size == 0)
+    if (seq_stack -> m_size == 0)
         return NULL;
 
-    void *data = stack -> data[0];
+    void *data = seq_stack -> data[0];
     return data;
 }
 
-int size_stack(struct SeqStack *stack)
+int size_seq_stack(struct SeqStack *seq_stack)
 {
-    if (!stack)
+    if (!seq_stack)
         return ERR;
 
-    return stack -> m_size;
+    return seq_stack -> m_size;
 }
 
-int is_empty_stack(struct SeqStack *stack)
+int is_empty_seq_stack(struct SeqStack *seq_stack)
 {
-    if (!stack)
+    if (!seq_stack)
         return ERR;
 
-    if (stack -> m_size == 0)
+    if (seq_stack -> m_size == 0)
         return True;
     return False;
 }
 
-int destroy_stack(struct SeqStack *stack)
+int destroy_seq_stack(struct SeqStack *seq_stack)
 {
-    if (!stack)
+    if (!seq_stack)
         return ERR;
 
-    free(stack);
-    stack = NULL;
+    free(seq_stack);
+    seq_stack = NULL;
     return True;
 }
