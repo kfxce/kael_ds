@@ -8,6 +8,7 @@ struct LinkStack *init_link_stack()
     if (!link_stack)
         return NULL;
     link_stack -> header.next = NULL;
+    link_stack -> header.data = NULL;
     link_stack -> m_size = 0;
     return link_stack;
 }
