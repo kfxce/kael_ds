@@ -3,10 +3,6 @@
 #include "kael_ds.h"
 
 
-/* 初始化链表
- *
- * return struct LinkList *: 返回结构体链表指针, 返回NULL则为失败
- */
 struct LinkList * init_link_list()
 {
     struct LinkList *link_list = malloc(sizeof(struct LinkList));
@@ -21,14 +17,6 @@ struct LinkList * init_link_list()
     return link_list;
 }
 
-/* 向链表插入节点
- *
- * param struct LinkList *link_list: 链表结构体指针
- * param int pos: 要插入的位置
- * param void *data: 要插入的数据
- *
- * return int；True成功，False失败
- */
 int insert_link_list(struct LinkList *link_list, int pos, void *data)
 {
     if(!link_list || !data)
@@ -65,12 +53,6 @@ int insert_link_list(struct LinkList *link_list, int pos, void *data)
     return True;
 }
 
-
-/* 遍历链表
- * 
- * param struct LinkList *link_list: 链表结构体指针
- * param callbck: 回调函数
- */
 void print_link_list(struct LinkList *link_list, void(*callback)(void *))
 {
     if (!link_list)
@@ -88,13 +70,6 @@ void print_link_list(struct LinkList *link_list, void(*callback)(void *))
     }
 }
 
-
-/* 删除节点-根据位置
- * param struct LinkList *link_list: 链表结构体指针
- * param int pos: 删除的位置
- *
- * return int: 成功返回True, 失败返回False
- */
 int remove_by_pos_link_list(struct LinkList *link_list, int pos)
 {
     if (!link_list) 
@@ -125,15 +100,6 @@ int remove_by_pos_link_list(struct LinkList *link_list, int pos)
     return True; 
 }
 
-
-/* 删除节点-根据值
- *
- * param struct LinkList *link_list: 链表结构体指针
- * param void *data: 数据
- * param int(*compare_callback)(void *, void*): 比较值是否相等的回调函数
- *
- * return int: 成功返回True, 失败返回False
- */
 int remove_by_value_link_list(struct LinkList *link_list, void *data, int(*compare_callback)(void *, void *))
 {
     if (!link_list || !data)
@@ -161,12 +127,6 @@ int remove_by_value_link_list(struct LinkList *link_list, void *data, int(*compa
     return False;
 }
 
-
-/* 清空链表
- * param struct LinkList *link_list: 链表指针
- *
- * return int: True 成功，False 失败
- */
 int clear_link_list(struct LinkList *link_list)
 {
     if (!link_list)
@@ -187,12 +147,6 @@ int clear_link_list(struct LinkList *link_list)
     return True;
 }
 
-/* 返回链表长度
- *
- * param struct LinkList *link_list: 链表指针
- *
- * return int: 链表长度， -1为错误
- */
 int len_link_list(struct LinkList *link_list)
 {
     if (!link_list)
@@ -200,12 +154,6 @@ int len_link_list(struct LinkList *link_list)
     return link_list -> m_size;
 }
 
-/* 销毁链表
- *
- * param struct LinkList *link_list: 链表指针
- *
- * return int: True成功，False失败，ERR错误
- */
 int destroy_link_list(struct LinkList *link_list)
 {
     if (!link_list)

@@ -239,3 +239,79 @@ int is_empty_seq_stack(struct SeqStack *stack);
  * return int: True成功，False，失败, ERR错误
  */
 int destroy_seq_stack(struct SeqStack *stack);
+
+
+/*
+ *
+ * ==============================
+ *            链式栈            =
+ * ==============================
+ *
+ */ 
+
+// 链式栈节点
+struct LinkStackNode {
+    struct LinkStackNode *next; //指针域
+    void *data; // 数据域
+};
+
+// 链式栈
+struct LinkStack
+{
+    struct LinkStackNode header; // 头节点 
+    int m_size; // 栈的大小
+};
+
+
+/* 初始化链式栈
+ */
+struct LinkStack *init_link_stack();
+
+/* 入栈
+ * 
+ * param struct LinkStruct *link_stack: 链式栈指针
+ * param void *data: 数据
+ *
+ * return int: True成功，False失败，ERR错误
+ */
+int push_link_stack(struct LinkStack *link_stack, void *data);
+
+/* 出栈
+ * 
+ * param struct LinkStruct *link_stack: 链式栈指针
+ *
+ * return void*: 数据
+ */
+void *pop_link_stack(struct LinkStack *link_stack);
+
+/* 返回栈顶元素
+ *
+ * param struct LinkStruct *link_stack: 链式栈指针
+ *
+ * return void *: 栈顶元素
+ */
+void *top_link_stack(struct LinkStack *link_stack);
+
+/* 判断是否为空
+ * 
+ * param struct LinkStruct *link_stack: 链式栈指针
+ *
+ * return int: True空，False非空，ERR错误
+ */
+int is_empty_link_stack(struct LinkStack *link_stack);
+
+/* 返回栈大小
+ *
+ * param struct LinkStruct *link_stack: 链式栈指针
+ *
+ * return int: 栈大小，如为ERR错误
+ */
+int size_link_stack(struct LinkStack *link_stack);
+
+/*
+ *
+ * param struct LinkStruct *link_stack: 链式栈指针
+ *
+ * return int: True成功，False失败，ERR错误
+ */
+int destroy_link_stack(struct LinkStack *link_stack);
