@@ -160,3 +160,82 @@ int len_link_list(struct LinkList *link_list);
  * return int: True成功，False失败，ERR错误
  */
 int destroy_link_list(struct LinkList *link_list);
+
+
+//=============================================栈=================================================
+
+
+/*
+ *
+ * ===========================
+ *             顺序栈        =
+ * ===========================
+ *
+ */
+
+// 栈的最大长度
+#define STACK_MAX 1024
+
+// 顺序栈
+struct SeqStack
+{
+    void *data[STACK_MAX]; // 数组
+    int m_size; // 栈的元素个数
+};
+
+/* 初始化栈
+ */
+struct SeqStack *init_stack();
+
+/* 入栈
+ *
+ * param struct SeqStack *stack: 栈指针
+ * param void *data: 数据
+ *
+ * return int: True成功，False，失败, ERR错误
+ */
+int push_stack(struct SeqStack *stack, void *data);
+
+/* 出栈
+ *
+ * param struct SeqStack *stack: 栈指针
+ *
+ * return void *data: 数据，NULL获取失败
+ */
+
+void *pop_stack(struct SeqStack *stack);
+
+/* 返回栈的顶端元素
+ *
+ * param struct SeqStack *stack: 栈指针
+ * param void *data: 数据
+ *
+ * return void *: 栈的顶端元素, ERR错误
+ */
+
+void *top_seq_stack(struct SeqStack *stack);
+
+/* 返回栈的大小
+ *
+ * param struct SeqStack *stack: 栈指针
+ * param void *data: 数据
+ *
+ * return int: 栈大小, ERR错误
+ */
+int size_stack(struct SeqStack *stack);
+
+/* 返回栈是否为空
+ *
+ * param struct SeqStack *stack: 栈指针
+ *
+ * return int: True为空，False不为空， ERR错误
+ */
+int is_empty_stack(struct SeqStack *stack);
+
+/* 销毁栈
+ *
+ * param struct SeqStack *stack: 栈指针
+ *
+ * return int: True成功，False，失败, ERR错误
+ */
+int destroy_stack(struct SeqStack *stack);

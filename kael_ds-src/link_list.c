@@ -40,7 +40,6 @@ int insert_link_list(struct LinkList *link_list, int pos, void *data)
         pos = link_list -> m_size;
     }
 
-    // 创建临时节点
     struct LinkNode *current_link_node = &link_list -> header;
     int i;
 
@@ -104,6 +103,7 @@ int remove_by_pos_link_list(struct LinkList *link_list, int pos)
     if (pos < 0 || pos > link_list -> m_size - 1)
         return False;
 
+    // 找到要删除节点的前驱节点
     struct LinkNode *current_link_node = &link_list -> header;
     int i;
     for (i = 0; i < pos; i++)
@@ -112,6 +112,7 @@ int remove_by_pos_link_list(struct LinkList *link_list, int pos)
     // 要删除的节点
     struct LinkNode *del_link_node = current_link_node -> next;
     
+    // 建立前驱节点和要删除节点的next节点的连接
     current_link_node -> next = del_link_node -> next;
 
     // 释放删除掉的节点

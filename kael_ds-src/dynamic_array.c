@@ -1,17 +1,9 @@
 #include "kael_ds.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 
-
-/* 初始化数组
- *
- * param int capacity: 数组的容量
- *
- * return struct DynamicArray *: 动态数组结构体指针
- *
- * 注意：如果返回为NULL则表示初始化失败
- */
 struct DynamicArray * init_dynamic_array(int capacity)
 {
         if (capacity <= 0)
@@ -44,14 +36,6 @@ struct DynamicArray * init_dynamic_array(int capacity)
 }
 
 
-/* 插入功能
- *
- * param struct DynamicArray *dynamic_array: 被插入新元素的动态数组指针
- * param int pos: 被插入动态数组的位置
- * param void *data: 被插入动态数组的新元素
- *
- * return int: True：成功，False：失败
- */
 int insert_dynamic_array(struct DynamicArray *dynamic_array, int pos, void *data)
 {
         if (!dynamic_array || !data)
@@ -104,25 +88,14 @@ int insert_dynamic_array(struct DynamicArray *dynamic_array, int pos, void *data
 }
 
 
-/* 遍历动态数组
- */
 void print_dynamic_array(struct DynamicArray *dynamic_array, void(*callback)(void *))
 {
     if (!dynamic_array)
         return;
-    if (dynamic_array -> m_size == 0)
-        return;
-    int i;
-    for (i = 0; i < dynamic_array -> m_size; i++)
+    for (int i = 0; i < dynamic_array -> m_size; i++)
         callback(dynamic_array -> paddr[i]);
 }
 
-/* 根据元素在数组中的位置删除数组中的元素
- *
- * param struct DynamicArray dynamic_array*: 动态数组指针
- * param int pos: 删除的位置
- * return: True: 成功，False：失败
- */
 int remove_by_pos_dynamic_array(struct DynamicArray *dynamic_array, int pos)
 {
     // 如果数组指针为NULL
@@ -145,12 +118,6 @@ int remove_by_pos_dynamic_array(struct DynamicArray *dynamic_array, int pos)
 }
 
 
-/*根据元素的值删除数组中的元素
- * 
- * param struct DynamicArray dynamic_array*; 动态数组指针
- * param void *data: 值
- * return：True：成功，False:失败
- */
 int remove_by_value_dynamic_array(struct DynamicArray *dynamic_array, void *data, 
         int(*compare_callback)(void *, void*))
 {
@@ -171,14 +138,6 @@ int remove_by_value_dynamic_array(struct DynamicArray *dynamic_array, void *data
     return False;
 }
 
-/*销毁数组
- *
- * param struct DynamicArray dynamic_array*: 动态数组指针
- *
- * return int: True：成功，False: 失败
- * 
- * 注意：销毁之后，如果再访问这个指针，就会出现段错误
- */
 int destroy_dynamic_array(struct DynamicArray *dynamic_array)
 {
     if (!dynamic_array)

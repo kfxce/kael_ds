@@ -14,15 +14,21 @@
 编写这个项目说明，希望这是一个很好的开始。
 
 项目文件结构：
-
 ```
 kael_ds/
 ├── kael_ds-src
-│   ├── dynamic_array.c
-│   └── kael_ds.h
+│   ├── dynamic_array.c
+│   ├── global.c
+│   ├── kael_ds.h
+│   ├── link_list.c
+│   └── seq_stack.c
 ├── Makefile
 ├── README.md
 └── test
+    ├── Makefile
+    ├── test_dynamic_array.c
+    ├── test_link_list.c
+    └── test_stack.c
 ```
 我特地去看了下skynet项目头文件是放在了skyent-src目录下，和.c源码是放一起的，那么我也准备这样做。
 
@@ -130,4 +136,36 @@ $ ./test_link_list
 链表长度: 0
 销毁链表
 $ make clean
+```
+
+
+## 0x2. 栈
+
+有这么几种实现：
+1. 顺序栈
+    * [x] 初始化
+    * [x] 入栈
+    * [x] 出栈
+    * [x] 判断是否为空
+    * [x] 返回栈大小
+    * [x] 销毁
+    * [x] 访问栈顶元素
+
+测试顺序栈
+```
+$ cd test
+$ make
+$ ./test_stack
+当前的大小为: 0
+当前的大小为: 1
+当前的大小为: 2
+当前的大小为: 3
+当前的大小为: 4
+当前的大小为: 5
+当前的大小为: 6
+pop
+pop = 亚索6, 18
+is empty = 0
+destroy
+$
 ```
