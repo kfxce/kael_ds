@@ -6,85 +6,85 @@
 
 struct DynamicArray * init_dynamic_array(int capacity)
 {
-        if (capacity <= 0)
-        {
-                return NULL;
-        }
-        struct DynamicArray *dynamic_array = malloc(sizeof(struct DynamicArray));
-        // 判断内存是否申请成功
-        if (!dynamic_array)
-        {
-                return NULL;
-        }
+    if (capacity <= 0)
+    {
+        return NULL;
+    }
+    struct DynamicArray *dynamic_array = malloc(sizeof(struct DynamicArray));
+    // 判断内存是否申请成功
+    if (!dynamic_array)
+    {
+        return NULL;
+    }
 
-        // 设置容量
-        dynamic_array -> m_capacity = capacity;
-        // 设置大小
-        dynamic_array -> m_size = 0;
+    // 设置容量
+    dynamic_array -> m_capacity = capacity;
+    // 设置大小
+    dynamic_array -> m_size = 0;
 
-        // 维护在堆区的数组指针
-        dynamic_array -> paddr = malloc(sizeof(void *) * dynamic_array -> m_capacity);
+    // 维护在堆区的数组指针
+    dynamic_array -> paddr = malloc(sizeof(void *) * dynamic_array -> m_capacity);
 
-        // 判断内存是否申请成功
-        if (!dynamic_array -> paddr)
-        {
-                free(dynamic_array);
-                return NULL;
-        }
+    // 判断内存是否申请成功
+    if (!dynamic_array -> paddr)
+    {
+        free(dynamic_array);
+        return NULL;
+    }
 
-        return dynamic_array;
+    return dynamic_array;
 }
 
 
 int insert_dynamic_array(struct DynamicArray *dynamic_array, int pos, void *data)
 {
-        if (!dynamic_array || !data)
-        {
-                return ERR; 
-        }
+    if (!dynamic_array || !data)
+    {
+        return ERR; 
+    }
 
 
-        // 无效的位置
-        if (pos < 0 || pos > dynamic_array -> m_size)
+    // 无效的位置
+    if (pos < 0 || pos > dynamic_array -> m_size)
+    {
+        return ERR;
+    }
+
+    // 先判断是否已经满了，如果满则开辟
+    if (dynamic_array -> m_size >= dynamic_array -> m_capacity)
+    {
+        // 申请一个更大的空间
+        int new_capacity = dynamic_array -> m_capacity * 2;
+        // 创建新空间
+        void ** new_space = malloc(sizeof(void *) * new_capacity);
+        if (!new_space)
         {
                 return ERR;
         }
+        // 将原有数据拷贝到新空间下
+        memcpy(new_space, dynamic_array -> paddr, sizeof(void *) * dynamic_array -> m_capacity);
+        // 释放原有空间
+        free(dynamic_array -> paddr);
+        // 更新指针指向
+        dynamic_array -> paddr = new_space;
+        // 更新指针容量大小
+        dynamic_array -> m_capacity = new_capacity;
+    }
 
-        // 先判断是否已经满了，如果满则开辟
-        if (dynamic_array -> m_size >= dynamic_array -> m_capacity)
-        {
-                // 申请一个更大的空间
-                int new_capacity = dynamic_array -> m_capacity * 2;
-                // 创建新空间
-                void ** new_space = malloc(sizeof(void *) * new_capacity);
-                if (!new_space)
-                {
-                        return ERR;
-                }
-                // 将原有数据拷贝到新空间下
-                memcpy(new_space, dynamic_array -> paddr, sizeof(void *) * dynamic_array -> m_capacity);
-                // 释放原有空间
-                free(dynamic_array -> paddr);
-                // 更新指针指向
-                dynamic_array -> paddr = new_space;
-                // 更新指针容量大小
-                dynamic_array -> m_capacity = new_capacity;
-        }
+    // 插入新的元素
+    // 从最后一个位置开始依次移动数据
+    for (int i = dynamic_array -> m_size - 1; i >= pos; i--)
+    {
+        dynamic_array -> paddr[i + 1] = dynamic_array -> paddr[i];
+    }
 
-        // 插入新的元素
-        // 从最后一个位置开始依次移动数据
-        for (int i = dynamic_array -> m_size - 1; i >= pos; i--)
-        {
-                dynamic_array -> paddr[i + 1] = dynamic_array -> paddr[i];
-        }
+    // 将新元素插入到指定位置
+    dynamic_array -> paddr[pos] = data;
 
-        // 将新元素插入到指定位置
-        dynamic_array -> paddr[pos] = data;
+    // 更新大小
+    dynamic_array -> m_size ++;
 
-        // 更新大小
-        dynamic_array -> m_size ++;
-
-        return True;
+    return True;
 }
 
 
