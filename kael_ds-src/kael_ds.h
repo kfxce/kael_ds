@@ -1,6 +1,6 @@
 extern const int True; // 真
 extern const int False; // 假
-extern const int ERR; // 空指针
+extern const int ERR; // 错误
 
 //==============================线性表===================================
 
