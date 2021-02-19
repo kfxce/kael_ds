@@ -15,11 +15,11 @@
 
 项目文件结构：
 ```
-kael_ds/
-├── kael_ds-src
+kfxce_ds/
+├── kfxce_ds-src
 │   ├── dynamic_array.c
 │   ├── global.c
-│   ├── kael_ds.h
+│   ├── kfxce_ds.h
 │   ├── link_list.c
 │   ├── link_queue.c
 │   ├── link_stack.c
@@ -41,7 +41,7 @@ kael_ds/
 
 生成静态库:
 ```
-$ cd kael_ds
+$ cd kfxce_ds
 $ make
 ```
 
