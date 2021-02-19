@@ -6,7 +6,7 @@ extern const int ERR; // 错误
 
 /*
  * =============================
- * =         动态数组          =
+ *          动态数组           =
  * =============================
  */
 
@@ -315,3 +315,12 @@ int size_link_stack(struct LinkStack *link_stack);
  * return int: True成功，False失败，ERR错误
  */
 int destroy_link_stack(struct LinkStack *link_stack);
+
+/*
+ *
+ * ==========================
+ *            队列          =
+ * ==========================
+ *
+ */
+#define SEQ_QUEUE_MAX 1024
