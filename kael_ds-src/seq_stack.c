@@ -39,7 +39,7 @@ void *pop_seq_stack(struct SeqStack *seq_stack)
         return NULL;
 
     void *data = seq_stack -> data[seq_stack -> m_size - 1];
-    seq_stack -> data[seq_stack -> m_size -1] = NULL;
+    seq_stack -> data[seq_stack -> m_size - 1] = NULL;
     seq_stack -> m_size --;
     return data;
 }

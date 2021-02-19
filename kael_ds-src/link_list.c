@@ -154,6 +154,17 @@ int len_link_list(struct LinkList *link_list)
     return link_list -> m_size;
 }
 
+int is_empty_link_list(struct LinkList *link_list)
+{
+    if (!link_list)
+        return ERR;
+
+    if (link_list -> m_size == 0)
+        return True;
+    return False;
+}
+
+
 int destroy_link_list(struct LinkList *link_list)
 {
     if (!link_list)
@@ -170,4 +181,21 @@ int destroy_link_list(struct LinkList *link_list)
     {
         return success;
     }
+}
+
+
+void *get_by_pos_link_list(struct LinkList *link_list, int pos)
+{
+    if (!link_list)
+        return NULL;
+
+    if (pos < 0 || pos > link_list -> m_size - 1)
+        return NULL;
+
+    // 找到要删除节点的前驱节点
+    struct LinkNode *current_link_node = &link_list -> header;
+    for (int i = 0; i < pos; i++)
+        current_link_node = current_link_node -> next;
+
+    return current_link_node -> data; 
 }

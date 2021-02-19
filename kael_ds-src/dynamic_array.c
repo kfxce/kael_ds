@@ -103,7 +103,7 @@ int remove_by_pos_dynamic_array(struct DynamicArray *dynamic_array, int pos)
         return ERR;
 
     // 无效的位置
-    if (pos < 0 || pos > dynamic_array -> m_size -1)
+    if (pos < 0 || pos > dynamic_array -> m_size - 1)
         return ERR;
 
     int i;
@@ -112,8 +112,12 @@ int remove_by_pos_dynamic_array(struct DynamicArray *dynamic_array, int pos)
         dynamic_array -> paddr[i] = dynamic_array -> paddr[i + 1];
 
     
+    // 将删除的元素的数组位置置空
+    dynamic_array -> paddr[dynamic_array -> m_size - 1] = NULL;
+
     // 数组大小减一
     dynamic_array -> m_size --;
+    
     return True;
 }
 
@@ -151,4 +155,27 @@ int destroy_dynamic_array(struct DynamicArray *dynamic_array)
     free(dynamic_array);
     dynamic_array = NULL;
     return True;
+}
+
+
+void *get_by_pos_dynamic_array(struct DynamicArray *dynamic_array, int pos)
+{
+    if (!dynamic_array)
+        return NULL;
+
+    if (pos < 0 || pos > dynamic_array -> m_size - 1)
+        return NULL;
+
+    void *data = dynamic_array -> paddr[pos];
+    return data;
+}
+
+
+int is_empty_dynamic_array(struct DynamicArray *dynamic_array)
+{
+    if (!dynamic_array)
+        return ERR;
+    if (dynamic_array -> m_size == 0)
+        return True;
+    return False;
 }
