@@ -9,7 +9,7 @@ struct SeqStack *init_seq_stack()
         return NULL;
 
     // 清空数组中的每个元素
-    memset(seq_stack -> data, 0, sizeof(void *) * STACK_MAX);
+    memset(seq_stack -> data, 0, sizeof(void *) * SEQ_STACK_MAX);
     seq_stack -> m_size = 0;
 
     return seq_stack;
@@ -21,7 +21,7 @@ int push_seq_stack(struct SeqStack *seq_stack, void *data)
         return ERR;
     
     // 判断栈是否满
-    if (seq_stack -> m_size == STACK_MAX)
+    if (seq_stack -> m_size == SEQ_STACK_MAX)
         return ERR;
     seq_stack -> data[seq_stack -> m_size] = data;
     // 更新栈大小

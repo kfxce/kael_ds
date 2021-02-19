@@ -61,11 +61,11 @@ int is_empty_link_list(struct LinkList *link_list);
 void *get_by_pos_link_list(struct LinkList *link_list, int pos);
 
 
-#define STACK_MAX 1024
+#define SEQ_STACK_MAX 1024
 
 struct SeqStack
 {
-    void *data[STACK_MAX];
+    void *data[SEQ_STACK_MAX];
     int m_size;
 };
 
