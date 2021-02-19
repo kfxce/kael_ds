@@ -1,10 +1,10 @@
 all:test_dynamic_array.o test_link_list.o test_seq_stack.o test_link_stack.o test_seq_queue.o test_link_queue.o
-	gcc test_link_list.o -L ../ -l kael_ds -o test_link_list
-	gcc test_dynamic_array.o -L ../ -l kael_ds -o test_dynamic_array
-	gcc test_seq_stack.o -L ../ -l kael_ds -o test_seq_stack
-	gcc test_link_stack.o -L ../ -l kael_ds -o test_link_stack
-	gcc test_seq_queue.o -L ../ -l kael_ds -o test_seq_queue
-	gcc test_link_queue.o -L ../ -l kael_ds -o test_link_queue
+	gcc test_link_list.o -L ../ -l kfxce_ds -o test_link_list
+	gcc test_dynamic_array.o -L ../ -l kfxce_ds -o test_dynamic_array
+	gcc test_seq_stack.o -L ../ -l kfxce_ds -o test_seq_stack
+	gcc test_link_stack.o -L ../ -l kfxce_ds -o test_link_stack
+	gcc test_seq_queue.o -L ../ -l kfxce_ds -o test_seq_queue
+	gcc test_link_queue.o -L ../ -l kfxce_ds -o test_link_queue
 
 
 test_dynamic_array.o:test_dynamic_array.c
