@@ -11,9 +11,11 @@ struct DynamicArray
 
 struct DynamicArray * init_dynamic_array(int capacity);
 
-int insert_dynamic_array(struct DynamicArray *dynamic_array, int pos, void *data);
+int insert_dynamic_array(struct DynamicArray *dynamic_array, 
+        int pos, void *data);
 
-void print_dynamic_array(struct DynamicArray *dynamic_array, void(*callback)(void *));
+void print_dynamic_array(struct DynamicArray *dynamic_array, 
+        void(*callback)(void *));
 
 int remove_by_pos_dynamic_array(struct DynamicArray *dynamic_array, int pos);
 
@@ -113,7 +115,8 @@ int destroy_link_stack(struct LinkStack *link_stack);
 
 #define SEQ_QUEUE_MAX 1024
 
-struct SeqQueue {
+struct SeqQueue 
+{
     struct DynamicArray *dynamic_array;
 };
 
@@ -130,7 +133,8 @@ int destroy_seq_queue(struct SeqQueue *seq_queue);
 int is_empty_seq_queue(struct SeqQueue *seq_queue);
 
 
-struct LinkQueue {
+struct LinkQueue 
+{
     struct LinkList *link_list;
 };
 
@@ -145,3 +149,29 @@ int size_link_queue(struct LinkQueue *link_queue);
 int destroy_link_queue(struct LinkQueue *link_queue);
 
 int is_empty_link_queue(struct LinkQueue *link_queue);
+
+
+struct BinaryTree
+{
+    void *data;
+    struct BinaryTree *left_child;
+    struct BinaryTree *right_child;
+};
+
+
+void left_recursion_binary_tree(struct BinaryTree *binary_tree, 
+        void(*callback)(void *));
+
+void middle_recursion_binary_tree(struct BinaryTree *binary_tree, 
+        void(*callback)(void *));
+
+void right_recursion_binary_tree(struct BinaryTree *binary_tree, 
+        void(*callback)(void *));
+
+void stat_leaf_num_binary_tree(struct BinaryTree *binary_tree, int *num);
+
+int deepth_binary_tree(struct BinaryTree *binary_tree);
+
+struct BinaryTree *copy_binary_tree(struct BinaryTree *binary_tree);
+
+int free_binary_tree(struct BinaryTree *binary_tree);

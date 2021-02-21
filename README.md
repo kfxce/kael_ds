@@ -17,6 +17,7 @@
 ```
 kfxce_ds/
 ├── kfxce_ds-src
+│   ├── binary_tree.c
 │   ├── dynamic_array.c
 │   ├── global.c
 │   ├── kfxce_ds.h
@@ -29,12 +30,14 @@ kfxce_ds/
 ├── README.md
 └── test
     ├── Makefile
+    ├── test_binary_tree.c
     ├── test_dynamic_array.c
     ├── test_link_list.c
     ├── test_link_queue.c
     ├── test_link_stack.c
     ├── test_seq_queue.c
     └── test_seq_stack.c
+
 ```
 我特地去看了下skynet项目头文件是放在了skyent-src目录下，和.c源码是放一起的，那么我也准备这样做。
 
@@ -64,3 +67,8 @@ $ make
 有这么两种：
 1. 顺序队列
 2. 链式队列
+
+## 0x4. 二叉树
+
+有这么几种：
+1. 二叉树

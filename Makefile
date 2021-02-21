@@ -12,7 +12,7 @@ $(target):$(obj)
 	$(AR) rcs $(target) $(obj)
 
 %.o:%.c
-	$(CC) -c $< -o $@
+	$(CC) -c $< -o $@ -g
 
 # 声明clean为伪目标
 .PHONY:clean
